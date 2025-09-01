@@ -1,0 +1,24 @@
+# Dépendances
+/vendor/
+composer.lock
+
+# Environnements
+.env
+.env.local
+.env.*.local
+
+# Cache et logs
+/cache/
+logs/
+*.log
+
+# IDE et OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Tests temporaires
+/phpunit.xml
+/phpunit.xml.dist

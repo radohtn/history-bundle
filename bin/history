@@ -1,0 +1,37 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Htn\HistoryBundle\Command\CommandDispatcher;
+use Htn\HistoryBundle\Command\ListCommand;
+use Htn\HistoryBundle\HistoryBundleServiceProvider;
+use Htn\HistoryBundle\Command\InstallCommand;
+
+$options = getopt("", ["action:", "dsn::", "user::", "password::", "mongodb::"]);
+$action = $options['action'] ?? null;
+
+if (!$action) {
+    echo "Usage: php bin/history --action=install [--dsn=...] [--mongodb=...]\n";
+    exit(1);
+}
+
+try {
+    $dispatcher = new CommandDispatcher();
+
+    // 🔹 Auto-chargement des commandes “classiques”
+    // HistoryBundleServiceProvider::registerCommands(
+    //     $dispatcher,
+    //     __DIR__ . '/../src/Command'
+    // );
+
+    $dispatcher->register('list', new ListCommand($dispatcher));
+    $dispatcher->register('install', new InstallCommand());
+
+    // 🔹 Dispatcher l’action
+    $dispatcher->dispatch($action, $options);
+
+} catch (Exception $e) {
+    echo "❌ Erreur: " . $e->getMessage() . "\n";
+    exit(1);
+}

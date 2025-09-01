@@ -1,0 +1,27 @@
+{
+  "name": "htn/history-bundle",
+  "description": "Un bundle PHP pour enregistrer l’historique des actions CRUD sur la base de données.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Htn\\HistoryBundle\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "ext-pdo": "*"
+  },
+  "suggest": {
+    "mongodb/mongodb": "Requis uniquement si vous utilisez MongoDB"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  },
+  "authors": [
+    {
+      "name": "Rado HTN",
+      "email": "rado.htn19@gmail.com"
+    }
+  ]
+}
